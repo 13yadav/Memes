@@ -4,10 +4,8 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
+import com.bumptech.glide.Glide
+import kotlinx.coroutines.*
 
 class ActivityViewModel : ViewModel() {
     private val viewModelJob = Job()
@@ -21,14 +19,19 @@ class ActivityViewModel : ViewModel() {
     val meme: LiveData<Meme>
         get() = _meme
 
+    private val _memeUrl = MutableLiveData<String>()
+    val memeUrl: LiveData<String>
+        get() = _memeUrl
+
     fun getMemes() {
-        coroutineScope.launch {
+        coroutineScope.launch(Dispatchers.IO) {
             val result = MemesApi.retrofitService.getMemeAsync().await()
             Log.d("JJJ", "Success: $result")
-            _meme.value = result
+            withContext(Dispatchers.Main) {
+                _memeUrl.value = result.url
+            }
         }
     }
-
 
     override fun onCleared() {
         super.onCleared()

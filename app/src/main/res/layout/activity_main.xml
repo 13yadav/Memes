@@ -4,12 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
-            type="com.strangecoder.memes.ActivityViewModel"/>
+            type="com.strangecoder.memes.ActivityViewModel" />
+
         <variable
             name="meme"
-            type="com.strangecoder.memes.Meme"/>
+            type="com.strangecoder.memes.Meme" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -21,9 +23,7 @@
             android:id="@+id/memeImage"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toBottomOf="@id/guideline"
             app:layout_constraintEnd_toEndOf="parent"
@@ -49,9 +49,11 @@
 
         <Button
             android:id="@+id/shareButton"
+            style="@style/buttonStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:padding="18dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="8dp"
             android:text="@string/share"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
@@ -60,11 +62,14 @@
 
         <Button
             android:id="@+id/nextButton"
+            style="@style/buttonStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:padding="18dp"
-            android:text="@string/next"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/button_bg"
             android:onClick="@{() -> viewModel.getMemes()}"
+            android:text="@string/next"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline2"
